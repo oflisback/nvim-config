@@ -1,0 +1,41 @@
+return {
+	"nvim-telescope/telescope.nvim",
+	branch = "0.1.x",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		{
+			"jvgrootveld/telescope-zoxide",
+			config = function()
+				require("telescope").load_extension("zoxide")
+			end,
+		},
+		"nvim-tree/nvim-web-devicons",
+		"folke/todo-comments.nvim",
+	},
+	config = function()
+		local telescope = require("telescope")
+		local actions = require("telescope.actions")
+		local transform_mod = require("telescope.actions.mt").transform_mod
+
+		telescope.setup({
+			defaults = {
+				path_display = { "smart" },
+				mappings = {
+					i = {
+						["<C-k>"] = actions.move_selection_previous,
+						["<C-j>"] = actions.move_selection_next,
+					},
+				},
+			},
+			pickers = {
+				find_files = {
+					-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+					find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+				},
+			},
+		})
+
+		telescope.load_extension("fzf")
+	end,
+}
