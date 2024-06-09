@@ -10,11 +10,14 @@ local function capture_command_output(cmd)
 	end
 end
 
+local openai_api_key = capture_command_output(os.getenv("HOME") .. "/.config/echo-openai-key.sh")
+
 return {
 	"robitx/gp.nvim",
+	enabled = openai_api_key ~= "",
 	opts = function()
 		return {
-			openai_api_key = capture_command_output(os.getenv("HOME") .. "/.config/echo-openai-key.sh"),
+			openai_api_key = openai_api_key,
 			agents = {
 				{
 					name = "ChatGPT4",
