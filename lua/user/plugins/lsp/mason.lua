@@ -45,7 +45,6 @@ return {
 				"stylua", -- lua formatter
 				"isort", -- python formatter
 				"black", -- python formatter
-				"luacheck",
 				"pylint",
 				"eslint_d",
 			},
