@@ -5,8 +5,8 @@ return {
 
 		wk.register({
 			name = "Git",
-			a = { "<cmd>Git commit --amend<CR>", "Amend commit" },
-			c = { "<cmd>Git commit --verbose<CR>", "Git commit" },
+			a = { "<cmd>Git commit --amend<CR>", "Amend" },
+			c = { "<cmd>Git commit --verbose<CR>", "Commit" },
 		}, { prefix = "<leader>g" })
 	end,
 	event = "VeryLazy",

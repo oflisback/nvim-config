@@ -36,11 +36,22 @@ wk.register({
 			"find files incl hidden",
 		},
 	},
+	g = {
+		b = { telescope.git_branches, "Branches" },
+		C = { telescope.git_commits, "Commits" },
+	},
 	l = {
 		d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show diagnostic" },
 		p = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show signature" },
 		j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next diagnostic" },
 		k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Prev diagnostic" },
+		a = {
+			function()
+				local curr_row = vim.api.nvim_win_get_cursor(0)[1]
+				vim.lsp.buf.code_action({ ["range"] = { ["start"] = { curr_row, 0 }, ["end"] = { curr_row, 100 } } })
+			end,
+			"Code Action On Line",
+		},
 	},
 	m = {
 		name = "misc",
