@@ -16,6 +16,7 @@ wk.register({
 		s = { "<cmd>GpStop<cr>", "Stop generation" },
 	},
 	c = { ":bd<CR>", "Close current buffer" },
+	o = { ":only<CR>", "Keep current buffer only" },
 	f = {
 		b = { telescope.buffers, "Buffers" },
 		f = {
