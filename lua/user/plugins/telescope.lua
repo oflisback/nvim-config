@@ -16,15 +16,20 @@ return {
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
-		local transform_mod = require("telescope.actions.mt").transform_mod
+
+		local open_with_trouble = require("trouble.sources.telescope").open
 
 		telescope.setup({
 			defaults = {
 				path_display = { "smart" },
 				mappings = {
 					i = {
+						["<c-t>"] = open_with_trouble,
 						["<C-k>"] = actions.move_selection_previous,
 						["<C-j>"] = actions.move_selection_next,
+					},
+					n = {
+						["<c-t>"] = open_with_trouble,
 					},
 				},
 			},
