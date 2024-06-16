@@ -8,6 +8,13 @@ keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" })
 
 vim.api.nvim_command('command! ShowFilePath lua print(vim.fn.expand("%:p"))')
 
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "gitcommit" },
+	callback = function()
+		vim.cmd.startinsert()
+	end,
+})
+
 wk.register({
 	a = {
 		name = "assistant",
