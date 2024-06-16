@@ -15,6 +15,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 })
 
+keymap.set("n", "gx", ":execute '!open ' . shellescape(expand('<cfile>'), 1)<CR>", { desc = "Open url" })
+
 wk.register({
 	a = {
 		name = "assistant",
