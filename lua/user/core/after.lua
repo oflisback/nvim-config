@@ -50,6 +50,10 @@ wk.register({
 	g = {
 		b = { telescope.git_branches, "Branches" },
 		C = { telescope.git_commits, "Commits" },
+		r = { "<cmd>Gread<CR", "Reset changes" },
+		o = { "<cmd>GBrowse<CR>", "Open in provider website" },
+		w = { "<cmd>Gwrite<CR", "Stage changes" },
+		d = { "<cmd>Gvdiff<CR>", "Diff" },
 	},
 	l = {
 		d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show diagnostic" },
