@@ -6,6 +6,8 @@ local keymap = vim.keymap
 keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" })
 keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" })
 
+vim.api.nvim_command('command! ShowFilePath lua print(vim.fn.expand("%:p"))')
+
 wk.register({
 	a = {
 		name = "assistant",
@@ -55,6 +57,7 @@ wk.register({
 	},
 	m = {
 		name = "misc",
+		f = { ":ShowFilePath<CR>", "File path" },
 		i = { ":InspectTree<CR>", "Inspect AST via treesitter" },
 		h = { ":nohl<CR>", "Clear highlights" },
 		p = { "<cmd>PeekOpen<CR>", "Markdown peek open" },
