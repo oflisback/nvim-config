@@ -17,6 +17,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 keymap.set("n", "gx", ":execute '!open ' . shellescape(expand('<cfile>'), 1)<CR>", { desc = "Open url" })
 
+keymap.set("n", "<C-h>", ":TmuxNavigateLeft<cr>")
+keymap.set("n", "<C-j>", ":TmuxNavigateDown<cr>")
+keymap.set("n", "<C-k>", ":TmuxNavigateUp<cr>")
+keymap.set("n", "<C-l>", ":TmuxNavigateRight<cr>")
+
 wk.register({
 	a = {
 		name = "assistant",
