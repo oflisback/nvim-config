@@ -30,10 +30,8 @@ return {
 				"tsserver",
 				"html",
 				"cssls",
-				"tailwindcss",
 				"lua_ls",
 				"emmet_ls",
-				"prismals",
 				"pyright",
 			},
 		})
