@@ -21,7 +21,6 @@ return {
 
 		telescope.setup({
 			defaults = {
-				path_display = { "smart" },
 				mappings = {
 					i = {
 						["<c-t>"] = open_with_trouble,
