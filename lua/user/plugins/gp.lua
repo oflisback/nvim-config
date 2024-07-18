@@ -10,7 +10,7 @@ local function capture_command_output(cmd)
 	end
 end
 
-local openai_api_key = capture_command_output(os.getenv("HOME") .. "/.config/echo-openai-key.sh")
+local openai_api_key = capture_command_output(os.getenv("HOME") .. "/.config/echo-openai-key.sh 2> /dev/null")
 
 return {
 	"robitx/gp.nvim",
