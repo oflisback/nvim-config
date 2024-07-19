@@ -6,4 +6,8 @@ return {
 		vim.o.timeoutlen = 300
 	end,
 	opts = {},
+	dependencies = {
+		"echasnovski/mini.nvim",
+		version = false,
+	},
 }

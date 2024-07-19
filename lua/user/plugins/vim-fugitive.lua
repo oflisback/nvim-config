@@ -7,11 +7,11 @@ return {
 			vim.fn.system({ "open", opts.fargs[1] })
 		end, { nargs = 1 })
 
-		wk.register({
-			name = "Git",
-			a = { "<cmd>Git commit --amend<CR>", "Amend" },
-			c = { "<cmd>Git commit --verbose<CR>", "Commit" },
-		}, { prefix = "<leader>g" })
+		wk.add({
+			{ "<leader>g", group = "Git" },
+			{ "<leader>ga", "<cmd>Git commit --amend<CR>", desc = "Amend" },
+			{ "<leader>gc", "<cmd>Git commit --verbose<CR>", desc = "Commit" },
+		})
 	end,
 	dependencies = { "tpope/vim-rhubarb" },
 	event = "VeryLazy",

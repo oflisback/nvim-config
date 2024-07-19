@@ -22,91 +22,80 @@ keymap.set("n", "<C-j>", ":TmuxNavigateDown<cr>")
 keymap.set("n", "<C-k>", ":TmuxNavigateUp<cr>")
 keymap.set("n", "<C-l>", ":TmuxNavigateRight<cr>")
 
-wk.register({
-	a = {
-		name = "assistant",
-		n = { "<cmd>GpChatNew vsplit<cr>", "New Chat" },
-		t = { "<cmd>GpChatToggle<cr>", "Toggle" },
-		r = { "<cmd>GpChatRespond<cr>", "Respond" },
-		f = { "<cmd>GpChatFinder<cr>", "Find chat" },
-		s = { "<cmd>GpStop<cr>", "Stop generation" },
+wk.add({
+	{ "<leader>a", group = "assistant", mode = "n" },
+	{ "<leader>af", "<cmd>GpChatFinder<cr>", desc = "Find chat" },
+	{ "<leader>an", "<cmd>GpChatNew vsplit<cr>", desc = "New Chat" },
+	{ "<leader>ar", "<cmd>GpChatRespond<cr>", desc = "Respond" },
+	{ "<leader>as", "<cmd>GpStop<cr>", desc = "Stop generation" },
+	{ "<leader>at", "<cmd>GpChatToggle<cr>", desc = "Toggle" },
+	{ "<leader>c", ":bd<CR>", desc = "Close current buffer" },
+	{
+		"<leader>fF",
+		function()
+			telescope.find_files({ find_command = { "rg", "--files", "--hidden", "-g", "!.git" } })
+		end,
+		desc = "find files incl hidden",
 	},
-	c = { ":bd<CR>", "Close current buffer" },
-	o = { ":only<CR>", "Keep current buffer only" },
-	f = {
-		b = { telescope.buffers, "Buffers" },
-		f = {
-			function()
-				telescope.find_files({ find_command = { "rg", "--files", "-g", "!.git" } })
-			end,
-			"find files",
-		},
-		w = { telescope.live_grep, "Live grep" },
-		k = { telescope.keymaps, "Keymaps" },
-		s = { telescope.grep_string, "Grep string under cursor" },
-		v = { telescope.git_status, "Git status" },
-		F = {
-			function()
-				telescope.find_files({ find_command = { "rg", "--files", "--hidden", "-g", "!.git" } })
-			end,
-			"find files incl hidden",
-		},
+	{ "<leader>fb", telescope.buffers, desc = "Buffers" },
+	{
+		"<leader>ff",
+		function()
+			telescope.find_files({ find_command = { "rg", "--files", "-g", "!.git" } })
+		end,
+		desc = "find files",
 	},
-	g = {
-		b = { telescope.git_branches, "Branches" },
-		C = { telescope.git_commits, "Commits" },
-		r = { "<cmd>Gread<CR", "Reset changes" },
-		w = { "<cmd>Gwrite<CR", "Stage changes" },
-		d = { "<cmd>Gvdiff<CR>", "Diff" },
+	{ "<leader>fk", telescope.keymaps, desc = "Keymaps" },
+	{ "<leader>fs", telescope.grep_string, desc = "Grep string under cursor" },
+	{ "<leader>fv", telescope.git_status, desc = "Git status" },
+	{ "<leader>fw", telescope.live_grep, desc = "Live grep" },
+	{ "<leader>gC", telescope.git_commits, desc = "Commits" },
+	{ "<leader>gb", telescope.git_branches, desc = "Branches" },
+	{ "<leader>gd", "<cmd>Gvdiff<CR>", desc = "Diff" },
+	{ "<leader>gr", "<cmd>Gread<CR", desc = "Reset changes" },
+	{ "<leader>gw", "<cmd>Gwrite<CR", desc = "Stage changes" },
+	{ "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
+	{ "<leader>ld", "<cmd>lua vim.diagnostic.open_float()<CR>", desc = "Show diagnostic" },
+	{ "<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<CR>", desc = "Next diagnostic" },
+	{ "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", desc = "Prev diagnostic" },
+	{ "<leader>lp", "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Show signature" },
+	{ "<leader>m", group = "misc" },
+	{ "<leader>mf", ":ShowFilePath<CR>", desc = "File path" },
+	{ "<leader>mh", ":nohl<CR>", desc = "Clear highlights" },
+	{ "<leader>mi", ":InspectTree<CR>", desc = "Inspect AST via treesitter" },
+	{ "<leader>mp", "<cmd>PeekOpen<CR>", desc = "Markdown peek open" },
+	{ "<leader>mx", "<cmd>PeekClose<CR>", desc = "Close markdown peek" },
+	{ "<leader>o", ":only<CR>", desc = "Keep current buffer only" },
+	{ "<leader>r", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
+	{ "<leader>s", group = "split" },
+	{ "<leader>sh", "<C-w>s", desc = "Split horizontally" },
+	{ "<leader>sm", "<cmd>MaximizerToggle<CR>", desc = "Maximize/minimize a split" },
+	{ "<leader>sv", "<C-w>v", desc = "Split vertically" },
+	{ "<leader>sx", "<cmd>close<CR>", desc = "Close current split" },
+	{ "<leader>uw", ":set wrap!<cr>", desc = "Toggle word wrap" },
+	{ "<leader>w", ":w<CR>", desc = "Write current buffer" },
+	{ "<leader>x", group = "trouble" },
+	{ "<leader>xL", "<cmd>Trouble loclist toggle focus=true<cr>", desc = "Loclist" },
+	{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>", desc = "Buffer diagnostics" },
+	{
+		"<leader>xl",
+		"<cmd>Trouble lsp toggle focus=true win.position=right<cr>",
+		desc = "LSP Definitions / references / ...",
 	},
-	l = {
-		d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show diagnostic" },
-		p = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show signature" },
-		j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next diagnostic" },
-		k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Prev diagnostic" },
-		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-	},
-	m = {
-		name = "misc",
-		f = { ":ShowFilePath<CR>", "File path" },
-		i = { ":InspectTree<CR>", "Inspect AST via treesitter" },
-		h = { ":nohl<CR>", "Clear highlights" },
-		p = { "<cmd>PeekOpen<CR>", "Markdown peek open" },
-		x = { "<cmd>PeekClose<CR>", "Close markdown peek" },
-	},
-	r = { "<cmd>Telescope oldfiles<cr>", "Recent files" },
-	s = {
-		name = "split",
-		v = { "<C-w>v", "Split vertically" },
-		h = { "<C-w>s", "Split horizontally" },
-		m = { "<cmd>MaximizerToggle<CR>", "Maximize/minimize a split" },
-		x = { "<cmd>close<CR>", "Close current split" },
-	},
-	x = {
-		name = "trouble",
-		x = { "<cmd>Trouble diagnostics toggle focus=true<cr>", "Diagnostics" },
-		X = { "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>", "Buffer diagnostics" },
-		l = { "<cmd>Trouble lsp toggle focus=true win.position=right<cr>", "LSP Definitions / references / ..." },
-		L = { "<cmd>Trouble loclist toggle focus=true<cr>", "Loclist" },
-		q = { "<cmd>Trouble qflist toggle<cr>", "Quickfix list" },
-	},
-	u = {
-		w = { ":set wrap!<cr>", "Toggle word wrap" },
-	},
-	w = { ":w<CR>", "Write current buffer" },
-	z = {
+	{ "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix list" },
+	{ "<leader>xx", "<cmd>Trouble diagnostics toggle focus=true<cr>", desc = "Diagnostics" },
+	{
+		"<leader>z",
 		function()
 			require("telescope").extensions.zoxide.list({})
 		end,
-		"Zoxide",
+		desc = "Zoxide",
 	},
-}, { mode = "n", prefix = "<leader>" })
+})
 
-wk.register({
-	a = {
-		name = "assistant",
-		p = { ":<C-u>'<,'>GpChatPaste<cr>", "Visual Chat Paste" },
-		s = { "<cmd>GpStop<cr>", "Stop generation" },
-		t = { ":<C-u>'<,'>GpChatToggle<cr>", "Visual Toggle Chat" },
-	},
-}, { mode = "v", prefix = "<leader>" })
+wk.add({
+	{ "<leader>a", group = "Assistant", mode = "v" },
+	{ "<leader>ap", ":<C-u>'<,'>GpChatPaste<cr>", desc = "Visual Chat Paste", mode = "v" },
+	{ "<leader>as", ":<C-u>'<,'>GpStop<cr>", desc = "Stop generation", mode = "v" },
+	{ "<leader>at", ":<C-u>'<,'>GpChatToggle<cr>", desc = "Visual Toggle chat", mode = "v" },
+})
