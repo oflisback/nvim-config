@@ -1,3 +1,25 @@
+local function biome_lsp_or_prettier()
+	local has_prettier = vim.fs.find({
+		".prettierrc",
+		".prettierrc.json",
+		".prettierrc.js",
+	}, { upward = true })[1]
+
+	if has_prettier then
+		return { "prettier" }
+	end
+
+	local has_biome = vim.fs.find({
+		"biome.json",
+	}, { upward = true })[1]
+
+	if has_biome then
+		return { "biome" }
+	end
+
+	return {}
+end
+
 return {
 	"stevearc/conform.nvim",
 	event = { "BufReadPre", "BufNewFile" },
@@ -6,23 +28,20 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescriptreact = { "prettier" },
-				svelte = { "prettier" },
-				css = { "prettier" },
-				html = { "prettier" },
-				json = { "prettier" },
-				yaml = { "prettier" },
-				markdown = { "prettier" },
-				graphql = { "prettier" },
-				liquid = { "prettier" },
+				javascript = biome_lsp_or_prettier,
+				typescript = biome_lsp_or_prettier,
+				javascriptreact = biome_lsp_or_prettier,
+				typescriptreact = biome_lsp_or_prettier,
+				css = biome_lsp_or_prettier,
+				html = biome_lsp_or_prettier,
+				json = biome_lsp_or_prettier,
+				yaml = biome_lsp_or_prettier,
+				markdown = biome_lsp_or_prettier,
 				lua = { "stylua" },
 				python = { "isort", "black" },
 			},
 			format_on_save = {
-				lsp_fallback = true,
+				lsp_fallback = false,
 				async = false,
 				timeout_ms = 1000,
 			},
