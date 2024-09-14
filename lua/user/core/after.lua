@@ -29,6 +29,9 @@ wk.add({
 	{ "<leader>ar", "<cmd>GpChatRespond<cr>", desc = "Respond" },
 	{ "<leader>as", "<cmd>GpStop<cr>", desc = "Stop generation" },
 	{ "<leader>at", "<cmd>GpChatToggle<cr>", desc = "Toggle" },
+	{ "<leader>ae", ":AICommandsExecute<cr>", desc = "Execute described command" },
+	{ "<leader>ao", ":AICommandsSuggest<cr>", desc = "Suggest described command" },
+
 	{ "<leader>c", ":bd<CR>", desc = "Close current buffer" },
 	{
 		"<leader>fF",
