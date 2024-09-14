@@ -3,7 +3,7 @@ local function biome_lsp_or_prettier()
 		".prettierrc",
 		".prettierrc.json",
 		".prettierrc.js",
-	}, { upward = true })[1]
+	}, { path = vim.fn.expand("%:p:h"), upward = true })
 
 	if has_prettier then
 		return { "prettier" }
