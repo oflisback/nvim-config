@@ -17,10 +17,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 keymap.set("n", "gx", ":execute '!open ' . shellescape(expand('<cfile>'), 1)<CR>", { desc = "Open url" })
 
-keymap.set("n", "<C-h>", ":TmuxNavigateLeft<cr>")
-keymap.set("n", "<C-j>", ":TmuxNavigateDown<cr>")
-keymap.set("n", "<C-k>", ":TmuxNavigateUp<cr>")
-keymap.set("n", "<C-l>", ":TmuxNavigateRight<cr>")
+local exitTerm = function()
+	vim.cmd(":ToggleTerm")
+end
+
+vim.keymap.set("t", "<esc><esc>", exitTerm)
 
 wk.add({
 	{ "<leader>a", group = "assistant", mode = "n" },
@@ -29,8 +30,10 @@ wk.add({
 	{ "<leader>ar", "<cmd>GpChatRespond<cr>", desc = "Respond" },
 	{ "<leader>as", "<cmd>GpStop<cr>", desc = "Stop generation" },
 	{ "<leader>at", "<cmd>GpChatToggle<cr>", desc = "Toggle" },
-	{ "<leader>ae", ":AICommandExecute<cr>", desc = "Execute described command" },
-	{ "<leader>ao", ":AICommandSuggest<cr>", desc = "Suggest described command" },
+	{ "<leader>ae", ":DescribeCommandExecute<cr>", desc = "Execute described command" },
+	{ "<leader>ao", ":DescribeCommandSuggest<cr>", desc = "Suggest described command" },
+
+	{ "§", ":ToggleTerm<CR>", desc = "ToggleTerm" },
 
 	{ "<leader>c", ":bd<CR>", desc = "Close current buffer" },
 	{
@@ -54,6 +57,7 @@ wk.add({
 	{ "<leader>fw", telescope.live_grep, desc = "Live grep" },
 	{ "<leader>gC", telescope.git_commits, desc = "Commits" },
 	{ "<leader>gb", telescope.git_branches, desc = "Branches" },
+	{ "<leader>gg", "<cmd>:G<CR>", desc = "Vim fugitive status" },
 	{ "<leader>gd", "<cmd>Gvdiff<CR>", desc = "Diff" },
 	{ "<leader>gr", "<cmd>Gread<CR", desc = "Reset changes" },
 	{ "<leader>gw", "<cmd>Gwrite<CR", desc = "Stage changes" },
