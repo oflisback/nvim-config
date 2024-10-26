@@ -3,6 +3,13 @@ local opt = vim.opt
 opt.relativenumber = true
 opt.number = true
 
+-- Automatically read files changed outside neovim
+vim.o.autoread = true
+vim.cmd([[augroup bufcheck
+  autocmd!
+  autocmd FocusGained,BufEnter * checktime
+augroup END]])
+
 -- tabs & indentation
 opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
 opt.shiftwidth = 2 -- 2 spaces for indent width
