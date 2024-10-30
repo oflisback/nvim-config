@@ -79,6 +79,7 @@ wk.add({
 	{ "<leader>gl", "<cmd>:G log<CR>", desc = "Git log" },
 	{ "<leader>glp", "<cmd>:G log -p<CR>", desc = "Git log -p" },
 	{ "<leader>gls", "<cmd>:G log -s<CR>", desc = "Git log -s" },
+	{ "<leader>glf", telescope.git_bcommits, desc = "Git log for current file" },
 	{ "<leader>gp", "<cmd>:G push<CR>", desc = "Git push" },
 	{ "<leader>gP", "<cmd>:G push --force<CR>", desc = "Git push --force" },
 	{ "<leader>gss", "<cmd>:G stash<CR>", desc = "Git stash" },
