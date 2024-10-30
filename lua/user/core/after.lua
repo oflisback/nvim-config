@@ -1,5 +1,6 @@
 local wk = require("which-key")
 local telescope = require("telescope.builtin")
+local utils = require("telescope.utils")
 
 local keymap = vim.keymap
 
@@ -32,7 +33,22 @@ wk.add({
 	{ "<leader>at", "<cmd>GpChatToggle<cr>", desc = "Toggle" },
 	{ "<leader>ae", ":DescribeCommandExecute<cr>", desc = "Execute described command" },
 	{ "<leader>ao", ":DescribeCommandSuggest<cr>", desc = "Suggest described command" },
-
+	{
+		"<leader>fd",
+		function()
+			local cwd = utils.buffer_dir()
+			if string.match(vim.api.nvim_buf_get_name(0), "^oil://") then
+				local oil_dir = require("oil").get_current_dir()
+				if oil_dir then
+					cwd = oil_dir
+				end
+			end
+			telescope.live_grep({
+				search_dirs = { cwd },
+			})
+		end,
+		desc = "Find word in directory (and below)",
+	},
 	{ "§", ":ToggleTerm<CR>", desc = "ToggleTerm" },
 
 	{ "<leader>c", ":bd<CR>", desc = "Close current buffer" },
