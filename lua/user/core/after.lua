@@ -98,6 +98,7 @@ wk.add({
 	{ "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", desc = "Prev diagnostic" },
 	{ "<leader>lp", "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Show signature" },
 	{ "<leader>m", group = "misc" },
+	{ "<leader>mz", ":ZenMode<CR>", desc = "Zen mode" },
 	{ "<leader>mf", ":ShowFilePath<CR>", desc = "File path" },
 	{ "<leader>mh", ":nohl<CR>", desc = "Clear highlights" },
 	{ "<leader>mi", ":InspectTree<CR>", desc = "Inspect AST via treesitter" },
