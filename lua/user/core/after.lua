@@ -72,7 +72,13 @@ wk.add({
 	{ "<leader>fv", telescope.git_status, desc = "Git status" },
 	{ "<leader>fw", telescope.live_grep, desc = "Live grep" },
 	{ "<leader>gC", telescope.git_commits, desc = "Commits" },
-	{ "<leader>gb", telescope.git_branches, desc = "Branches" },
+	{
+		"<leader>gb",
+		function()
+			telescope.git_branches({ pattern = "--sort=-committerdate" })
+		end,
+		desc = "Branches",
+	},
 	{ "<leader>gg", "<cmd>:tab G<CR>", desc = "Vim fugitive status" },
 	{ "<leader>gD", "<cmd>Gvdiff<CR>", desc = "Diff" },
 	{ "<leader>gf", "<cmd>:G fetch<CR>", desc = "Git fetch" },
