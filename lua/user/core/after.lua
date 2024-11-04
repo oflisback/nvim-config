@@ -84,12 +84,16 @@ wk.add({
 	{ "<leader>gP", "<cmd>:G push --force<CR>", desc = "Git push --force" },
 	{ "<leader>gss", "<cmd>:G stash<CR>", desc = "Git stash" },
 	{ "<leader>gsp", "<cmd>:G stash pop<CR>", desc = "Git stash pop" },
+	{ "<leader>gl", "<cmd>:G log<CR>", desc = "Git log" },
+	{ "<leader>glp", "<cmd>:G log -p<CR>", desc = "Git log -p" },
+	{ "<leader>gls", "<cmd>:G log --stat<CR>", desc = "Git log -s" },
+	{ "<leader>glr", "<cmd>:G reflog<CR>", desc = "Git reflog" },
 
 	{ "<leader>grs", "<cmd>:CursorResetCommitSoft<CR>", desc = "Git reset soft to cursor ref" },
 	{ "<leader>grm", "<cmd>:CursorResetCommitMixed<CR>", desc = "Git reset mixed to cursor ref" },
 	{ "<leader>grh", "<cmd>:CursorResetCommitHard<CR>", desc = "Git reset hard to cursor ref" },
 	{ "<leader>gy", "<cmd>:CursorCherryPickCommit<CR>", desc = "Git cherry-pick cursor ref" },
-	{ "<leader>go", "<cmd>:CursorCheckOutCommit<CR>", desc = "Git checkout cursor ref" },
+	--	{ "<leader>go", "<cmd>:CursorCheckOutCommit<CR>", desc = "Git checkout cursor ref" },
 	{ "<leader>gd", "<cmd>:CursorDropCommit<CR>", desc = "Git drop cursor ref" },
 
 	{ "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
