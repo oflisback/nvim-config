@@ -5,11 +5,11 @@ return {
 		local lint = require("lint")
 
 		lint.linters_by_ft = {
-			javascript = { "eslint_d" },
-			typescript = { "eslint_d" },
-			javascriptreact = { "eslint_d" },
-			typescriptreact = { "eslint_d" },
-			svelte = { "eslint_d" },
+			javascript = { "eslint" },
+			typescript = { "eslint" },
+			javascriptreact = { "eslint" },
+			typescriptreact = { "eslint" },
+			svelte = { "eslint" },
 			python = { "pylint" },
 		}
 
@@ -40,7 +40,7 @@ return {
 					-- Use biome if biome.json is present
 					lint.try_lint("biomejs")
 				elseif eslint_config_exists() then
-					lint.try_lint("eslint_d")
+					lint.try_lint("eslint")
 				else
 					-- Use the default linter otherwise
 					lint.try_lint()
