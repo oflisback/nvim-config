@@ -39,6 +39,7 @@ return {
 				markdown = biome_lsp_or_prettier,
 				lua = { "stylua" },
 				python = { "isort", "black" },
+				go = { "golines" },
 			},
 			format_on_save = {
 				lsp_fallback = false,
