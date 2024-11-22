@@ -21,6 +21,21 @@ return {
 
 		telescope.setup({
 			defaults = {
+				path_display = {
+					"smart",
+				},
+				layout_config = {
+					horizontal = {
+						preview_width = 0.6, -- Increase this to enlarge the preview window
+						results_width = 0.4, -- Set how wide the results panel is
+						width = 0.99,
+					},
+					vertical = {
+						preview_cutoff = 40,
+						preview_height = 0.6,
+						width = 0.99,
+					},
+				},
 				mappings = {
 					i = {
 						["<c-t>"] = open_with_trouble,
