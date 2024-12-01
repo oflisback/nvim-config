@@ -18,6 +18,16 @@ return {
 
 		local keymap = vim.keymap -- for conciseness
 
+		local original_notify = vim.notify
+
+		vim.notify = function(msg, log_level, opts)
+			-- worst hack ever, silence false positive spam about a ts_ls not being attached
+			-- when we detach it, but it is attached and gets detached.
+			if not msg:find("Client with id %d+ not attached to buffer %d+") then
+				original_notify(msg, log_level, opts)
+			end
+		end
+
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
@@ -78,6 +88,19 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+		local detach_if_active = function(name, bufnr)
+			local active_clients = vim.lsp.get_clients()
+
+			for _, client in pairs(active_clients) do
+				if client.attached_buffers and client.attached_buffers[bufnr] then
+					if client.name == name then
+						vim.lsp.buf_detach_client(bufnr, client.id)
+						return
+					end
+				end
+			end
+		end
+
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
 			function(server_name)
@@ -89,7 +112,7 @@ return {
 				-- configure svelte server
 				lspconfig["svelte"].setup({
 					capabilities = capabilities,
-					on_attach = function(client, bufnr)
+					on_attach = function(client, _)
 						vim.api.nvim_create_autocmd("BufWritePost", {
 							pattern = { "*.js", "*.ts" },
 							callback = function(ctx)
@@ -98,6 +121,28 @@ return {
 							end,
 						})
 					end,
+				})
+			end,
+			["denols"] = function()
+				-- configure graphql language server
+				lspconfig["denols"].setup({
+					on_attach = function(_, bufnr)
+						detach_if_active("ts_ls", bufnr)
+					end,
+					root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deps.ts", "import_map.json"),
+					capabilities = capabilities,
+					lint = true,
+					unstable = true,
+					enable = true,
+					suggest = {
+						imports = {
+							hosts = {
+								["https://deno.land"] = true,
+								["https://cdn.nest.land"] = true,
+								["https://crux.land"] = true,
+							},
+						},
+					},
 				})
 			end,
 			["graphql"] = function()
