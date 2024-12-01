@@ -1,9 +1,9 @@
-local function biome_lsp_or_prettier()
+local function conditional_ts_formatter()
 	local has_prettier = vim.fs.find({
 		".prettierrc",
 		".prettierrc.json",
 		".prettierrc.js",
-	}, { path = vim.fn.expand("%:p:h"), upward = true })
+	}, { path = vim.fn.expand("%:p:h"), upward = true })[1]
 
 	if has_prettier then
 		return { "prettier" }
@@ -11,10 +11,18 @@ local function biome_lsp_or_prettier()
 
 	local has_biome = vim.fs.find({
 		"biome.json",
-	}, { upward = true })[1]
+	}, { path = vim.fn.expand("%:p:h"), upward = true })[1]
 
 	if has_biome then
 		return { "biome" }
+	end
+
+	local has_deno = vim.fs.find({
+		"deno.json",
+	}, { path = vim.fn.expand("%:p:h"), upward = true })[1]
+
+	if has_deno then
+		return { "denols" }
 	end
 
 	return {}
@@ -28,15 +36,15 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				javascript = biome_lsp_or_prettier,
-				typescript = biome_lsp_or_prettier,
-				javascriptreact = biome_lsp_or_prettier,
-				typescriptreact = biome_lsp_or_prettier,
-				css = biome_lsp_or_prettier,
-				html = biome_lsp_or_prettier,
-				json = biome_lsp_or_prettier,
-				yaml = biome_lsp_or_prettier,
-				markdown = biome_lsp_or_prettier,
+				javascript = conditional_ts_formatter,
+				typescript = conditional_ts_formatter,
+				javascriptreact = conditional_ts_formatter,
+				typescriptreact = conditional_ts_formatter,
+				css = conditional_ts_formatter,
+				html = conditional_ts_formatter,
+				json = conditional_ts_formatter,
+				yaml = conditional_ts_formatter,
+				markdown = conditional_ts_formatter,
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				go = { "golines" },
