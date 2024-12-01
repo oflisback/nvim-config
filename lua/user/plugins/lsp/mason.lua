@@ -30,6 +30,7 @@ return {
 				"ts_ls",
 				"html",
 				"cssls",
+				"denols",
 				"lua_ls",
 				"emmet_ls",
 				"pyright",
