@@ -22,7 +22,16 @@ local function conditional_ts_formatter()
 	}, { path = vim.fn.expand("%:p:h"), upward = true })[1]
 
 	if has_deno then
-		return { "denols" }
+		-- Doesn't work. Could it be that something changed for Deno 2?
+		return {
+			command = "deno",
+			args = function(_, _)
+				return {
+					"fmt",
+					"-",
+				}
+			end,
+		}
 	end
 
 	return {}
