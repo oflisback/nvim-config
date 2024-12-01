@@ -42,9 +42,6 @@ return {
 					lint.try_lint("biomejs")
 				elseif eslint_config_exists() then
 					lint.try_lint("eslint")
-				else
-					-- Use the default linter otherwise
-					lint.try_lint()
 				end
 			end
 		end
