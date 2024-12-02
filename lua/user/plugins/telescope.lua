@@ -22,7 +22,7 @@ return {
 		telescope.setup({
 			defaults = {
 				path_display = {
-					"smart",
+					"truncate",
 				},
 				layout_config = {
 					horizontal = {
