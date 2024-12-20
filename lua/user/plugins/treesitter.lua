@@ -3,6 +3,7 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	build = ":TSUpdate",
 	dependencies = {
+		"https://github.com/apple/pkl-neovim.git",
 		"windwp/nvim-ts-autotag",
 	},
 	config = function()
@@ -22,6 +23,7 @@ return {
 			},
 			-- ensure these language parsers are installed
 			ensure_installed = {
+				"pkl",
 				"json",
 				"javascript",
 				"typescript",
