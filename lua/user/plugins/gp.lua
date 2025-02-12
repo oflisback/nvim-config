@@ -20,10 +20,11 @@ return {
 			openai_api_key = openai_api_key,
 			agents = {
 				{
-					name = "ChatGPT4",
+					name = "Open-AI o3-mini",
 					chat = true,
 					command = true,
-					model = "gpt-4o",
+					--model = "gpt-4o",
+					model = "o3-mini",
 					system_prompt = "You are a general AI assistant.\n\n"
 						.. "The user provided the additional info about how they would like you to respond:\n\n"
 						.. "- If you're unsure don't guess and say you don't know instead.\n"
