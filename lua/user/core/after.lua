@@ -38,11 +38,11 @@ vim.keymap.set("t", "<esc><esc>", exitTerm)
 
 wk.add({
 	{ "<leader>a", group = "assistant", mode = "n" },
-	{ "<leader>af", "<cmd>GpChatFinder<cr>", desc = "Find chat" },
-	{ "<leader>an", "<cmd>GpChatNew vsplit<cr>", desc = "New Chat" },
-	{ "<leader>ar", "<cmd>GpChatRespond<cr>", desc = "Respond" },
+	{ "<leader>af", "<cmd>PrtChatFinder<cr>", desc = "Find chat" },
+	{ "<leader>an", "<cmd>PrtChatNew vsplit<cr>", desc = "New Chat" },
+	{ "<leader>ar", "<cmd>PrtChatRespond<cr>", desc = "Respond" },
 	{ "<leader>as", "<cmd>GpStop<cr>", desc = "Stop generation" },
-	{ "<leader>at", "<cmd>GpChatToggle<cr>", desc = "Toggle" },
+	{ "<leader>at", "<cmd>PrtChatToggle<cr>", desc = "Toggle" },
 	{ "<leader>ae", ":DescribeCommandExecute<cr>", desc = "Execute described command" },
 	{ "<leader>ao", ":DescribeCommandSuggest<cr>", desc = "Suggest described command" },
 	{
@@ -156,7 +156,7 @@ wk.add({
 
 wk.add({
 	{ "<leader>a", group = "Assistant", mode = "v" },
-	{ "<leader>ap", ":<C-u>'<,'>GpChatPaste<cr>", desc = "Visual Chat Paste", mode = "v" },
+	{ "<leader>ap", ":<C-u>'<,'>PrtChatPaste<cr>", desc = "Visual Chat Paste", mode = "v" },
 	{ "<leader>as", ":<C-u>'<,'>GpStop<cr>", desc = "Stop generation", mode = "v" },
-	{ "<leader>at", ":<C-u>'<,'>GpChatToggle<cr>", desc = "Visual Toggle chat", mode = "v" },
+	{ "<leader>at", ":<C-u>'<,'>PrtChatToggle<cr>", desc = "Visual Toggle chat", mode = "v" },
 })
