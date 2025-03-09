@@ -122,6 +122,7 @@ wk.add({
 	{ "<leader>m", group = "misc" },
 	{ "<leader>mz", ":ZenMode<CR>", desc = "Zen mode" },
 	{ "<leader>mf", ":ShowFilePath<CR>", desc = "File path" },
+	{ "<leader>mo", ":e ~/.config/nvim/README.md<CR>", desc = "Open config repo readme" },
 	{ "<leader>mh", ":nohl<CR>", desc = "Clear highlights" },
 	{ "<leader>mi", ":InspectTree<CR>", desc = "Inspect AST via treesitter" },
 	{ "<leader>mp", "<cmd>PeekOpen<CR>", desc = "Markdown peek open" },

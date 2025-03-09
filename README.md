@@ -20,3 +20,7 @@ I'd prefer to have all leader-prefixed keybinds in `after.lua` but some plugins 
 | <leader>sm     | Toggle maximize current split        | vim-maximize |
 | gc<motion>     | Comment out code                     | comment.nvim |
 | gc visual mode | Comment out selection                | comment.nvim |
+
+## Telescope specific keybinds
+
+{Ctrl-space} fuzzy_refine current search results, so if I was searching for a word, after <C-space> I can search among the current results!
