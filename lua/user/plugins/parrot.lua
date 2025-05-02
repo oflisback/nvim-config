@@ -23,15 +23,15 @@ return {
 				gemini = {
 					api_key = gemini_api_key,
 					topic = {
-						model = "gemini-2.0-flash",
-						system_prompt = "You are a general AI assistant.\n\n"
+						model = "gemini-2.5-flash-preview-04-17",
+						--[[ 						system_prompt = "You are a general AI assistant.\n\n"
 							.. "The user provided the additional info about how they would like you to respond:\n\n"
 							.. "- If you're unsure don't guess and say you don't know instead.\n"
 							.. "- Ask question if you need clarification to provide better answer.\n"
 							.. "- Think deeply and carefully from first principles step by step.\n"
 							.. "- If the answer does not need to be lengthy, make it a priority to keep it short.\n"
 							.. "- Don't elide any code from your output if the answer requires coding.\n"
-							.. "- Take a deep breath; You've got this!\n",
+							.. "- Take a deep breath; You've got this!\n", ]]
 					},
 				},
 				-- openai = {
