@@ -34,6 +34,8 @@ local exitTerm = function()
 	vim.cmd(":ToggleTerm")
 end
 
+vim.lsp.enable("svelte")
+
 vim.keymap.set("t", "<esc><esc>", exitTerm)
 
 wk.add({

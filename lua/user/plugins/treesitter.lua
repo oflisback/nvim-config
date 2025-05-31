@@ -30,6 +30,7 @@ return {
 				"tsx",
 				"yaml",
 				"html",
+				"svelte",
 				"css",
 				"prisma",
 				"markdown",
