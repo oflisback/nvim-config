@@ -32,6 +32,7 @@ return {
 				"html",
 				"cssls",
 				"tailwindcss", -- Add TailwindCSS LSP
+				"svelte",
 				"lua_ls",
 				"emmet_ls",
 				"pyright",
@@ -108,6 +109,50 @@ return {
 									invalidTailwindDirective = "error",
 									invalidVariant = "error",
 									recommendedVariantOrder = "warning",
+								},
+							},
+						},
+					})
+				end,
+
+				svelte = function()
+					local lspconfig = require("lspconfig")
+					local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+					lspconfig.svelte.setup({
+						capabilities = capabilities,
+						filetypes = { "svelte" },
+						settings = {
+							svelte = {
+								plugin = {
+									html = {
+										completions = {
+											enable = true,
+											emmet = true,
+										},
+									},
+									svelte = {
+										compilerWarnings = {
+											["a11y-accesskey"] = "ignore",
+											["a11y-autofocus"] = "ignore",
+											["a11y-misplaced-role"] = "ignore",
+											["a11y-unknown-role"] = "ignore",
+											["a11y-hidden"] = "ignore",
+											["a11y-misplaced-scope"] = "ignore",
+											["a11y-positive-tabindex"] = "ignore",
+											["a11y-invalid-attribute"] = "ignore",
+											["a11y-missing-attribute"] = "ignore",
+											["a11y-img-redundant-alt"] = "ignore",
+											["a11y-label-has-associated-control"] = "ignore",
+											["a11y-media-has-caption"] = "ignore",
+											["a11y-distracting-elements"] = "ignore",
+											["a11y-structure"] = "ignore",
+											["a11y-mouse-events-have-key-events"] = "ignore",
+											["a11y-missing-content"] = "ignore",
+										},
+									},
+									css = { enable = true },
+									typescript = { enable = true },
 								},
 							},
 						},
