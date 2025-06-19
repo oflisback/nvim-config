@@ -30,6 +30,14 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 keymap.set("n", "gx", ":execute '!open ' . shellescape(expand('<cfile>'), 1)<CR>", { desc = "Open url" })
 
+vim.keymap.set({ "i", "s" }, "<Tab>", function()
+	return require("luasnip").expand_or_jumpable() and "<Plug>luasnip-expand-or-jump" or "<Tab>"
+end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
+	return require("luasnip").jumpable(-1) and "<Plug>luasnip-jump-prev" or "<S-Tab>"
+end, { silent = true })
+
 local exitTerm = function()
 	vim.cmd(":ToggleTerm")
 end
