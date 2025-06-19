@@ -49,6 +49,7 @@ return {
 				typescript = conditional_ts_formatter,
 				javascriptreact = conditional_ts_formatter,
 				typescriptreact = conditional_ts_formatter,
+				svelte = conditional_ts_formatter,
 				css = conditional_ts_formatter,
 				html = conditional_ts_formatter,
 				json = conditional_ts_formatter,
