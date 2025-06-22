@@ -89,6 +89,13 @@ wk.add({
 		end,
 		desc = "find files",
 	},
+	{
+		"<leader>fg",
+		function()
+			require("custom.glob_picker").glob_file_picker()
+		end,
+		desc = "Find files by glob pattern",
+	},
 	{ "<leader>fk", telescope.keymaps, desc = "Keymaps" },
 	{ "<leader>fs", telescope.grep_string, desc = "Grep string under cursor" },
 	{ "<leader>fv", telescope.git_status, desc = "Git status" },
