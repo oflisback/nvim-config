@@ -17,23 +17,6 @@ local function conditional_ts_formatter()
 		return { "biome" }
 	end
 
-	local has_deno = vim.fs.find({
-		"deno.json",
-	}, { path = vim.fn.expand("%:p:h"), upward = true })[1]
-
-	if has_deno then
-		-- Doesn't work. Could it be that something changed for Deno 2?
-		return {
-			command = "deno",
-			args = function(_, _)
-				return {
-					"fmt",
-					"-",
-				}
-			end,
-		}
-	end
-
 	return {}
 end
 
