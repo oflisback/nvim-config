@@ -28,6 +28,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 })
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		local reg = vim.v.event.regname
+		if reg == "*" then
+			local contents = vim.fn.getreg("*")
+			local yank_type = vim.v.event.regtype
+			vim.fn.setreg("+", contents, yank_type)
+		end
+	end,
+})
+
 keymap.set("n", "gx", ":execute '!open ' . shellescape(expand('<cfile>'), 1)<CR>", { desc = "Open url" })
 
 vim.keymap.set({ "i", "s" }, "<Tab>", function()
