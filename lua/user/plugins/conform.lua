@@ -1,6 +1,7 @@
 local function conditional_ts_formatter()
 	local has_prettier = vim.fs.find({
 		".prettierrc",
+		"prettier.config.js",
 		".prettierrc.json",
 		".prettierrc.js",
 	}, { path = vim.fn.expand("%:p:h"), upward = true })[1]
