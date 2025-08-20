@@ -37,6 +37,7 @@ return {
 				"emmet_ls",
 				"pyright",
 				"gopls",
+				"eslint", -- ESLint LSP server
 			},
 			automatic_installation = true,
 			handlers = {
@@ -154,6 +155,50 @@ return {
 									css = { enable = true },
 									typescript = { enable = true },
 								},
+							},
+						},
+					})
+				end,
+
+				eslint = function()
+					local lspconfig = require("lspconfig")
+					local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+					lspconfig.eslint.setup({
+						capabilities = capabilities,
+						filetypes = {
+							"javascript",
+							"javascriptreact",
+							"typescript",
+							"typescriptreact",
+							"vue",
+							"svelte",
+						},
+						settings = {
+							codeAction = {
+								disableRuleComment = {
+									enable = true,
+									location = "separateLine",
+								},
+								showDocumentation = {
+									enable = true,
+								},
+							},
+							codeActionOnSave = {
+								enable = false, -- We'll handle this ourselves
+								mode = "all",
+							},
+							format = true,
+							nodePath = "",
+							onIgnoredFiles = "off",
+							packageManager = "npm",
+							quiet = false,
+							rulesCustomizations = {},
+							run = "onType",
+							useESLintClass = false,
+							validate = "on",
+							workingDirectory = {
+								mode = "location",
 							},
 						},
 					})

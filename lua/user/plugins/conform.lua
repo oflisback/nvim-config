@@ -1,24 +1,6 @@
 local function conditional_ts_formatter()
-	local has_prettier = vim.fs.find({
-		".prettierrc",
-		"prettier.config.js",
-		".prettierrc.json",
-		".prettierrc.js",
-	}, { path = vim.fn.expand("%:p:h"), upward = true })[1]
-
-	if has_prettier then
-		return { "prettier" }
-	end
-
-	local has_biome = vim.fs.find({
-		"biome.json",
-	}, { path = vim.fn.expand("%:p:h"), upward = true })[1]
-
-	if has_biome then
-		return { "biome" }
-	end
-
-	return {}
+	local tool_detection = require("user.utils.tool-detection")
+	return tool_detection.get_js_formatters()
 end
 
 return {
@@ -43,11 +25,31 @@ return {
 				python = { "isort", "black" },
 				go = { "golines" },
 			},
-			format_on_save = {
-				lsp_fallback = false,
-				async = false,
-				timeout_ms = 1000,
-			},
+			format_on_save = function(bufnr)
+				-- Apply ESLint code actions first (for import sorting, etc.)
+				local code_actions = require("user.utils.code-actions-on-save")
+				if code_actions.should_apply_code_actions() then
+					code_actions.apply_eslint_code_actions()
+					-- Wait a bit for code actions to complete
+					vim.defer_fn(function()
+						-- Then apply formatting
+						require("conform").format({
+							bufnr = bufnr,
+							lsp_fallback = false,
+							async = false,
+							timeout_ms = 1000,
+						})
+					end, 50)
+					return {}  -- Don't format immediately
+				else
+					-- No ESLint, just format normally
+					return {
+						lsp_fallback = false,
+						async = false,
+						timeout_ms = 1000,
+					}
+				end
+			end,
 		})
 	end,
 }
