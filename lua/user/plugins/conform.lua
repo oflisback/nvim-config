@@ -22,7 +22,7 @@ return {
 				yaml = conditional_ts_formatter,
 				markdown = conditional_ts_formatter,
 				lua = { "stylua" },
-				python = { "isort", "black" },
+				-- python = { "isort", "black" }, -- Disabled: no auto-format on save for Python
 				go = { "golines" },
 			},
 			format_on_save = function(bufnr)
