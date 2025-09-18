@@ -38,6 +38,7 @@ return {
 				"pyright",
 				"gopls",
 				"eslint", -- ESLint LSP server
+				"biome", -- Biome LSP server
 			},
 			automatic_installation = true,
 			handlers = {
