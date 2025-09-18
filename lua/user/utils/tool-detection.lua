@@ -48,7 +48,21 @@ end
 -- Check if Biome configuration exists
 function M.biome_config_exists()
 	local cwd = vim.fn.getcwd()
-	return vim.fn.filereadable(cwd .. "/biome.json") == 1
+
+	-- Check in root directory
+	if vim.fn.filereadable(cwd .. "/biome.json") == 1 then
+		return true
+	end
+
+	-- Check in common frontend subdirectories
+	local subdirs = {"frontend", "webapp"}
+	for _, subdir in ipairs(subdirs) do
+		if vim.fn.filereadable(cwd .. "/" .. subdir .. "/biome.json") == 1 then
+			return true
+		end
+	end
+
+	return false
 end
 
 -- Check if Prettier configuration exists
@@ -117,4 +131,3 @@ function M.get_js_formatters()
 end
 
 return M
-
