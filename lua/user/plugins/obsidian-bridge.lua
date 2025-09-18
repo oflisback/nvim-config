@@ -7,7 +7,7 @@ return {
 		require("obsidian-bridge").setup({
 			scroll_sync = true,
 			obsidian_server_address = "http://localhost:27123",
-			picker = "snacks",
+			picker = "telescope",
 		})
 	end,
 	event = {
