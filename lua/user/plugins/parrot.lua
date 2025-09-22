@@ -16,6 +16,7 @@ local gemini_api_key = capture_command_output(os.getenv("HOME") .. "/.config/ech
 return {
 	"frankroeder/parrot.nvim",
 	dependencies = { "ibhagwan/fzf-lua", "nvim-lua/plenary.nvim" },
+  enabled = false,
 	config = function()
 		require("parrot").setup({
 			providers = {
