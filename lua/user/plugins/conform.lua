@@ -22,8 +22,14 @@ return {
 				yaml = conditional_ts_formatter,
 				markdown = conditional_ts_formatter,
 				lua = { "stylua" },
+				sql = { "pg_format" },
 				-- python = { "isort", "black" }, -- Disabled: no auto-format on save for Python
 				go = { "golines" },
+			},
+			formatters = {
+				pg_format = {
+					command = "/usr/bin/pg_format",
+				},
 			},
 			format_on_save = function(bufnr)
 				-- Apply ESLint code actions first (for import sorting, etc.)

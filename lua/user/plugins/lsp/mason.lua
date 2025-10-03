@@ -39,6 +39,7 @@ return {
 				"gopls",
 				"eslint", -- ESLint LSP server
 				"biome", -- Biome LSP server
+				"postgres_lsp",
 			},
 			automatic_installation = true,
 			handlers = {
@@ -216,6 +217,7 @@ return {
 				"black",
 				"pylint",
 				"eslint",
+				-- "pgformatter", install via system package
 			},
 		})
 	end,
