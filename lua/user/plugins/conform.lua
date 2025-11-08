@@ -22,8 +22,7 @@ return {
 				yaml = conditional_ts_formatter,
 				markdown = conditional_ts_formatter,
 				lua = { "stylua" },
-				sql = { "pg_format" },
-				-- python = { "isort", "black" }, -- Disabled: no auto-format on save for Python
+				python = { "isort", "black" },
 				go = { "golines" },
 			},
 			formatters = {
