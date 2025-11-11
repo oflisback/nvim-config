@@ -3,6 +3,11 @@ local function conditional_ts_formatter()
 	return tool_detection.get_js_formatters()
 end
 
+local function conditional_python_formatter()
+	local tool_detection = require("user.utils.tool-detection")
+	return tool_detection.get_python_formatters()
+end
+
 return {
 	"stevearc/conform.nvim",
 	event = { "BufReadPre", "BufNewFile" },
@@ -22,7 +27,7 @@ return {
 				yaml = conditional_ts_formatter,
 				markdown = conditional_ts_formatter,
 				lua = { "stylua" },
-				python = { "isort", "black" },
+				python = conditional_python_formatter,
 				go = { "golines" },
 			},
 			formatters = {

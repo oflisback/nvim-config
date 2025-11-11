@@ -31,6 +31,11 @@ return {
 				if linter then
 					lint.try_lint(linter)
 				end
+			elseif filetype == "python" then
+				local linter = tool_detection.get_python_linter()
+				if linter then
+					lint.try_lint(linter)
+				end
 			end
 		end
 

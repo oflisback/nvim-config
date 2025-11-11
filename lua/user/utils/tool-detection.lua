@@ -130,4 +130,84 @@ function M.get_js_formatters()
 	return formatters
 end
 
+-- Check if Ruff configuration exists
+function M.ruff_config_exists()
+	local current_dir = vim.fn.expand("%:p:h")
+
+	-- Check for ruff.toml or .ruff.toml
+	local ruff_configs = { "ruff.toml", ".ruff.toml" }
+	for _, config in ipairs(ruff_configs) do
+		local found = vim.fs.find(config, {
+			path = current_dir,
+			upward = true,
+		})[1]
+		if found then
+			return true
+		end
+	end
+
+	-- Check for ruff config in pyproject.toml
+	local pyproject = vim.fs.find("pyproject.toml", {
+		path = current_dir,
+		upward = true,
+	})[1]
+
+	if pyproject then
+		local content = vim.fn.readfile(pyproject)
+		local content_str = table.concat(content, "\n")
+		-- Check for [tool.ruff] section or ruff as a dependency
+		if string.find(content_str, "%[tool%.ruff%]") or string.find(content_str, '"ruff"') then
+			return true
+		end
+	end
+
+	return false
+end
+
+-- Check if project uses uv
+function M.uv_project_exists()
+	local current_dir = vim.fn.expand("%:p:h")
+
+	-- Check for uv.lock
+	local uv_lock = vim.fs.find("uv.lock", {
+		path = current_dir,
+		upward = true,
+	})[1]
+	if uv_lock then
+		return true
+	end
+
+	-- Check for [tool.uv] in pyproject.toml
+	local pyproject = vim.fs.find("pyproject.toml", {
+		path = current_dir,
+		upward = true,
+	})[1]
+
+	if pyproject then
+		local content = vim.fn.readfile(pyproject)
+		local content_str = table.concat(content, "\n")
+		if string.find(content_str, "%[tool%.uv%]") then
+			return true
+		end
+	end
+
+	return false
+end
+
+-- Get the appropriate linter for Python files
+function M.get_python_linter()
+	if M.ruff_config_exists() then
+		return "ruff"
+	end
+	return "pylint"
+end
+
+-- Get the appropriate formatters for Python files
+function M.get_python_formatters()
+	if M.ruff_config_exists() then
+		return { "ruff_format", "ruff_organize_imports" }
+	end
+	return { "isort", "black" }
+end
+
 return M
